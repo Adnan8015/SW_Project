@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h3>Top 10 Companies</h3>
+
+<table>
+  <tr>
+    <th>Company Name</th>
+    <th>Rating</th>
+  </tr>
+  {% for company in top_companies_data %}
+  <tr>
+    <td>{{ company.name }}</td>
+    <td>{{ company.rating }}</td>
+  </tr>
+  {% endfor %}
+</table>
+
+<a href="{% url 'home_page' %}">Back to Home Page</a>
+{% endblock %}

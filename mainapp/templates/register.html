@@ -1,0 +1,112 @@
+{% extends "base.html" %} {% block content %}
+<div class="global-container">
+  <div class="card login-form">
+    <div class="card-body">
+      <h3 class="card-title text-center">Register in to CompanyCatcher</h3>
+      <div class="card-text">
+        {% if messages %} {% for message in messages %}
+        <div class="alert alert-info">{{ message }}</div>
+        {% endfor %} {% endif %}
+        <form method="post">
+          {% csrf_token %}
+          <div class="form-group">
+            <label for="exampleInputEmail1">Username</label>
+            <input
+              type="text"
+              name="username"
+              class="form-control form-control-sm"
+              id="exampleInputEmail1"
+              aria-describedby="emailHelp"
+            />
+          </div>
+          <div class="form-group">
+            <label for="exampleInputEmail1">Email address</label>
+            <input
+              type="email"
+              name="email"
+              class="form-control form-control-sm"
+              id="exampleInputEmail1"
+              aria-describedby="emailHelp"
+            />
+          </div>
+          <div class="form-group">
+            <label for="exampleInputPassword1">Password</label>
+            <div class="input-group">
+              <input
+                type="password"
+                name="password"
+                class="form-control form-control-sm"
+                id="exampleInputPassword1"
+                onkeyup="checkPasswordStrength(this.value)"
+              />
+              <div class="input-group-append">
+                <span
+                  class="input-group-text"
+                  id="password-toggle"
+                  onclick="togglePasswordVisibility()"
+                >
+                  <i class="fas fa-eye" id="eye-icon"></i>
+                </span>
+              </div>
+            </div>
+          </div>
+          <!-- Password strength indicator -->
+          <div id="passwordStrength"></div>
+          <!-- End of password strength indicator -->
+          <button type="submit" class="btn btn-primary btn-block mt-2">
+            Sign in
+          </button>
+          <div class="sign-up mt-2">
+            Already have an account?
+            <a href="{% url 'login_attempt'%}">Log in</a>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  function togglePasswordVisibility() {
+    var passwordInput = document.getElementById("exampleInputPassword1");
+    var eyeIcon = document.getElementById("eye-icon");
+
+    if (passwordInput.type === "password") {
+      passwordInput.type = "text";
+      eyeIcon.classList.remove("fa-eye");
+      eyeIcon.classList.add("fa-eye-slash");
+    } else {
+      passwordInput.type = "password";
+      eyeIcon.classList.remove("fa-eye-slash");
+      eyeIcon.classList.add("fa-eye");
+    }
+  }
+
+  function checkPasswordStrength(password) {
+    const passwordStrength = document.getElementById("passwordStrength");
+
+    // Implement your password strength rules here
+    // You can use regular expressions and other checks
+
+    if (password.length < 8) {
+      passwordStrength.innerHTML = "Password is weak (too short)";
+      passwordStrength.style.color = "red";
+    }
+
+    // Example: Check for character classes
+    const hasLowerCase = /[a-z]/.test(password);
+    const hasUpperCase = /[A-Z]/.test(password);
+    const hasDigit = /[0-9]/.test(password);
+    const hasSpecialChar = /[!@#$%^&*(),.?":{}|<>]/.test(password);
+
+    // Example: Check length
+    if (hasLowerCase && hasUpperCase && hasDigit && hasSpecialChar) {
+      passwordStrength.innerHTML = "Password is Strong";
+      passwordStrength.style.color = "green";
+    } else {
+      passwordStrength.innerHTML = "Password is weak";
+      passwordStrength.style.color = "red";
+    }
+  }
+</script>
+{% endblock %}

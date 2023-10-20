@@ -1,0 +1,35 @@
+{% extends "base.html" %} {% block content %}
+<header>
+  <nav>
+    <div class="logo">CompanyCatcher</div>
+    <div class="menu">
+      <a class="anc" href="#">About us</a>
+      <a class="anc" href="#">Contact us</a>
+      <a class="anc" href="{% url 'company_selection' %}">Profile</a>
+    </div>
+
+    <div class="logout">
+      <a href="{% url 'login_attempt' %}">Log out</a>
+    </div>
+  </nav>
+</header>
+
+<div class="global-container">
+  <div class="company-list">
+    <div class="card-body">
+      <div class="text-center">
+        <h3 class="company-name">Selected Companies</h3>
+        {% if selected_companies %}
+        <ul>
+          {% for company in selected_companies %}
+          <li>{{ company.name }}</li>
+          {% endfor %}
+        </ul>
+        {% else %}
+        <p>No companies selected.</p>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

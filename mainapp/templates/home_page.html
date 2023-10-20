@@ -1,0 +1,48 @@
+{% extends "base.html" %} {% block content %}
+<header>
+  <nav>
+    <div class="logo">CompanyCatcher</div>
+    <div class="menu">
+      <a class="anc" href="#">About us</a>
+      <a class="anc" href="#">Contact us</a>
+      <a class="anc" href="{% url 'user_profile' %}">Profile</a>
+      <a class="anc" href="{% url 'expected_salary' %}"> Expected Salary</a>
+      <a class="anc" href="{% url 'top_companies' %}">Top companies</a>
+    </div>
+
+    <div class="logout">
+      <a href="{% url 'login_attempt' %}">Log out</a>
+    </div>
+    <div>
+      <i class="material-icons"></i>
+    </div>
+  </nav>
+</header>
+
+<h3>Company Selection</h3>
+<form method="post">
+  {% csrf_token %}
+  <ul>
+    {% for company in companies %}
+    <li>
+      <input
+        type="checkbox"
+        name="selected_companies"
+        value="{{ company.id }}"
+        {%
+        if
+        company.id
+        in
+        selected_company_ids
+        %}checked{%
+        endif
+        %}
+      />
+      {{ company.name }}
+    </li>
+    {% endfor %}
+  </ul>
+  <button type="submit">Save Selection</button>
+</form>
+
+{% endblock %}

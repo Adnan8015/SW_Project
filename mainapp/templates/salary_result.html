@@ -1,0 +1,27 @@
+{% extends "base.html" %} {% block content %}
+<header>
+  <nav>
+    <div class="logo">CompanyCatcher</div>
+    <div class="menu">
+      <a class="anc" href="#">About us</a>
+      <a class="anc" href="#">Contact us</a>
+      <a class="anc" href="#">Profile</a>
+      <a class="anc" href="{% url 'expected_salary' %}">Expected Salary</a>
+    </div>
+    <div class="logout">
+      <a href="{% url 'login_attempt' %}">Log out</a>
+    </div>
+    <div>
+      <i class="material-icons"></i>
+    </div>
+  </nav>
+</header>
+
+<div class="global-container">
+  <div class="expected-salary-result">
+    <h2>Expected Salary Prediction</h2>
+    <p>Based on your input, the expected salary is: ${{ predicted_salary }}</p>
+  </div>
+</div>
+
+{% endblock %}

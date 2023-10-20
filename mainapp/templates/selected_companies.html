@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+{% block content %}
+  <h3>Selected Companies</h3>
+  <ul>
+    {% for company in selected_companies %}
+      <li>{{ company.name }}</li>
+    {% endfor %}
+  </ul>
+{% endblock %}

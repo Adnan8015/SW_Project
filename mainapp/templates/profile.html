@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% block content %}
+<header>
+  <nav>
+    <div class="logo">CompanyCatcher</div>
+    <div class="menu">
+      <a class="anc" href="#">About us</a>
+      <a class="anc" href="#">Contact us</a>
+      <a class="anc" href="{% url 'user_profile' %}">Profile</a> <!-- Link to the user's profile page -->
+      <a class="anc" href="{% url 'expected_salary' %}">Expected Salary</a>
+    </div>
+
+    <div class="logout">
+      <a href="{% url 'login_attempt' %}">Log out</a>
+    </div>
+    <div>
+      <i class="material-icons"></i>
+    </div>
+  </nav>
+</header>
+
+<h3>User Profile</h3>
+<ul>
+  {% for company in selected_companies %}
+    <li>{{ company.company.name }}</li>
+  {% empty %}
+    <li>No companies selected.</li>
+  {% endfor %}
+</ul>
+{% endblock %}

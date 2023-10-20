@@ -1,0 +1,46 @@
+{% extends "base.html" %} {% block content %}
+<header>
+  <nav>
+    <div class="logo">CompanyCatcher</div>
+    <div class="menu">
+      <a class="anc" href="#">About us</a>
+      <a class="anc" href="#">Contact us</a>
+      <a class="anc" href="#">Profile</a>
+      <a class="anc" href="{% url 'expected_salary' %}">Expected Salary</a>
+    </div>
+    <div class="logout">
+      <a href="{% url 'login_attempt' %}">Log out</a>
+    </div>
+    <div>
+      <i class="material-icons"></i>
+    </div>
+  </nav>
+</header>
+
+<div class="global-container">
+  <div class="calculate-salary-form">
+    <h3 class="calculate-salary-title">Calculate Expected Salary</h3>
+    <form method="post" action="{% url 'calculate_expected_salary' %}">
+      {% csrf_token %}
+      <label for="experience">Experience:</label>
+      <input type="text" name="experience" id="experience" />
+      <br />
+
+      <label for="cgpa">CGPA:</label>
+      <input type="text" name="cgpa" id="cgpa" />
+      <br />
+
+      <label for="skill">Skill:</label>
+      <select name="skill" id="skill">
+        <option value="ML">Machine Learning</option>
+        <option value="AppDev">App Development</option>
+        <option value="WebDev">Web Development</option>
+      </select>
+      <br />
+
+      <input type="submit" value="Calculate Salary" />
+    </form>
+  </div>
+</div>
+
+{% endblock %}
